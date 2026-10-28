@@ -63,6 +63,32 @@ public class ProductService : IProductService
         _repository.DeleteProduct(product);
     }
 
+    public List<ProductForReadDto> SearchProductsByName(string name)
+    {
+        List<ProductForReadDto> result = new List<ProductForReadDto>();
+        foreach (Product product in _repository.SearchProductsByName(name))
+        {
+            result.Add(MapToReadDto(product));
+        }
+        return result;
+    }
+
+    public ProductStatsDto GetStats()
+    {
+        List<Product> products = _repository.GetAllProducts();
+        if (products.Count == 0)
+        {
+            return new ProductStatsDto();
+        }
+
+        return new ProductStatsDto
+        {
+            Total = products.Count,
+            AveragePrice = Math.Round(products.Average(p => p.Price), 2),
+            MostExpensiveName = products.OrderByDescending(p => p.Price).First().Name
+        };
+    }
+
     private static ProductForReadDto MapToReadDto(Product product)
     {
         return new ProductForReadDto

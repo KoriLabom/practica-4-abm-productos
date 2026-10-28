@@ -29,6 +29,20 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
+    [HttpGet("search")]
+    public IActionResult SearchProductsByName([FromQuery] string name)
+    {
+        List<ProductForReadDto> products = _service.SearchProductsByName(name);
+        return Ok(products);
+    }
+
+    [HttpGet("stats")]
+    public IActionResult GetStats()
+    {
+        ProductStatsDto stats = _service.GetStats();
+        return Ok(stats);
+    }
+
     [HttpPost]
     public IActionResult CreateProduct(ProductForCreateDto dto)
     {

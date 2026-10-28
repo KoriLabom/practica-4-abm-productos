@@ -57,3 +57,23 @@ DELETE {{AbmProductos_HostAddress}}/api/products/2
 DELETE {{AbmProductos_HostAddress}}/api/products/2
 
 ###
+
+GET {{AbmProductos_HostAddress}}/api/products/search?name=teclado
+Accept: application/json
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products/search?name=MONITOR
+Accept: application/json
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products/search?name=heladera
+Accept: application/json
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products/stats
+Accept: application/json
+
+###
