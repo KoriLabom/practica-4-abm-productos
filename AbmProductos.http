@@ -77,3 +77,41 @@ GET {{AbmProductos_HostAddress}}/api/products/stats
 Accept: application/json
 
 ###
+
+# Respuesta de la API a este POST (nombre vacío y precio 100):
+# HTTP/1.1 400 Bad Request
+# Content-Type: application/problem+json; charset=utf-8
+# Date: Wed, 28 Oct 2026 12:44:55 GMT
+# Server: Kestrel
+# Transfer-Encoding: chunked
+#
+# {"type":"https://tools.ietf.org/html/rfc9110#section-15.5.1","title":"One or more validation errors occurred.","status":400,"errors":{"Name":["El nombre es obligatorio.","El nombre debe tener entre 3 y 100 caracteres."]},"traceId":"00-0e5b54012737533aa109991350b93356-32aee39714c34353-00"}
+POST {{AbmProductos_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": 100
+}
+
+###
+
+POST {{AbmProductos_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Webcam HD",
+  "price": 9000
+}
+
+###
+
+PUT {{AbmProductos_HostAddress}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Monitor 24 pulgadas",
+  "price": 4000
+}
+
+###

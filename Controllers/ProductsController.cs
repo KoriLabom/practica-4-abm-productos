@@ -46,8 +46,15 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public IActionResult CreateProduct(ProductForCreateDto dto)
     {
-        ProductForReadDto created = _service.CreateProduct(dto);
-        return CreatedAtAction(nameof(GetProductById), new { id = created.Id }, created);
+        try
+        {
+            ProductForReadDto created = _service.CreateProduct(dto);
+            return CreatedAtAction(nameof(GetProductById), new { id = created.Id }, created);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
     }
 
     [HttpPut("{id}")]
@@ -57,8 +64,15 @@ public class ProductsController : ControllerBase
         {
             return NotFound();
         }
-        _service.UpdateProduct(id, dto);
-        return NoContent();
+        try
+        {
+            _service.UpdateProduct(id, dto);
+            return NoContent();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new { message = ex.Message });
+        }
     }
 
     [HttpDelete("{id}")]

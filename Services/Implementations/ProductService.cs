@@ -32,6 +32,11 @@ public class ProductService : IProductService
 
     public ProductForReadDto CreateProduct(ProductForCreateDto dto)
     {
+        if (ExistsProductWithName(dto.Name, 0))
+        {
+            throw new InvalidOperationException("Ya existe un producto con el nombre '" + dto.Name + "'.");
+        }
+
         Product product = new Product
         {
             Name = dto.Name,
@@ -47,6 +52,10 @@ public class ProductService : IProductService
         if (product == null)
         {
             return;
+        }
+        if (ExistsProductWithName(dto.Name, id))
+        {
+            throw new InvalidOperationException("Ya existe un producto con el nombre '" + dto.Name + "'.");
         }
         product.Name = dto.Name;
         product.Price = dto.Price;
@@ -87,6 +96,11 @@ public class ProductService : IProductService
             AveragePrice = Math.Round(products.Average(p => p.Price), 2),
             MostExpensiveName = products.OrderByDescending(p => p.Price).First().Name
         };
+    }
+
+    private bool ExistsProductWithName(string name, int excludedId)
+    {
+        return _repository.GetAllProducts().Any(p => p.Id != excludedId && p.Name.ToLower() == name.ToLower());
     }
 
     private static ProductForReadDto MapToReadDto(Product product)
