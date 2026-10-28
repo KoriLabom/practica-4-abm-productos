@@ -1,14 +1,19 @@
 using AbmProductos.Entities;
 using AbmProductos.Models.DTOs.Requests;
 using AbmProductos.Models.DTOs.Responses;
-using AbmProductos.Repositories.Implementations;
+using AbmProductos.Repositories.Interfaces;
 using AbmProductos.Services.Interfaces;
 
 namespace AbmProductos.Services.Implementations;
 
 public class ProductService : IProductService
 {
-    private ProductRepository _repository = new ProductRepository();
+    private readonly IProductRepository _repository;
+
+    public ProductService(IProductRepository repository)
+    {
+        _repository = repository;
+    }
 
     public List<ProductForReadDto> GetAllProducts()
     {

@@ -1,6 +1,6 @@
 using AbmProductos.Models.DTOs.Requests;
 using AbmProductos.Models.DTOs.Responses;
-using AbmProductos.Services.Implementations;
+using AbmProductos.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AbmProductos.Controllers;
@@ -9,7 +9,12 @@ namespace AbmProductos.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private ProductService _service = new ProductService();
+    private readonly IProductService _service;
+
+    public ProductsController(IProductService service)
+    {
+        _service = service;
+    }
 
     [HttpGet]
     public IActionResult GetAllProducts()
