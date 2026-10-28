@@ -1,1 +1,59 @@
 @AbmProductos_HostAddress = http://localhost:5233
+
+GET {{AbmProductos_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products/3
+Accept: application/json
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products/999
+Accept: application/json
+
+###
+
+POST {{AbmProductos_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Parlante portátil",
+  "price": 15999.90
+}
+
+###
+
+GET {{AbmProductos_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+PUT {{AbmProductos_HostAddress}}/api/products/1
+Content-Type: application/json
+
+{
+  "name": "Mouse inalámbrico Logitech",
+  "price": 4599.99
+}
+
+###
+
+PUT {{AbmProductos_HostAddress}}/api/products/999
+Content-Type: application/json
+
+{
+  "name": "No existe",
+  "price": 100
+}
+
+###
+
+DELETE {{AbmProductos_HostAddress}}/api/products/2
+
+###
+
+DELETE {{AbmProductos_HostAddress}}/api/products/2
+
+###
