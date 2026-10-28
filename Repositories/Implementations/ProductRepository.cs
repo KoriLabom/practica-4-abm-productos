@@ -1,8 +1,9 @@
 using AbmProductos.Entities;
+using AbmProductos.Repositories.Interfaces;
 
 namespace AbmProductos.Repositories.Implementations;
 
-public class ProductRepository
+public class ProductRepository : IProductRepository
 {
     private static List<Product> _products = new()
     {

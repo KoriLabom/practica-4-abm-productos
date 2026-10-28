@@ -2,10 +2,11 @@ using AbmProductos.Entities;
 using AbmProductos.Models.DTOs.Requests;
 using AbmProductos.Models.DTOs.Responses;
 using AbmProductos.Repositories.Implementations;
+using AbmProductos.Services.Interfaces;
 
 namespace AbmProductos.Services.Implementations;
 
-public class ProductService
+public class ProductService : IProductService
 {
     private ProductRepository _repository = new ProductRepository();
 
